@@ -103,11 +103,10 @@ def reviews():
 @app.route("/goodread", methods = ["GET"])
 def goodread():
     isbn = input("ISBN of book: ")
-    res = requests.get("https://www.goodreads.com/book/isbn/ISBN?format=json", params={"isbn": isbn})
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "C8QiRC6BWxUGwubAxOAXQ", "isbns": "9781632168146"})
     if res.status_code != 200:
         raise Exception("ERROR: API request unsuccessful.")
-    data = res.json()
-    return jsonify(data)
+    print(res.json())
 
 @app.route("/logout")
 def logout():
