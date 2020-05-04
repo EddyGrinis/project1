@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    The Book
+{% endblock %}
+
+{% block body %}
+    <h1>Book details</h1>
+
+    <ul>
+        <li>id: {{ book.id }}</li>
+        <li>ISBN: {{ book.isbn }}</li>
+        <li>Title: {{ book.title }}</li>
+        <li>Author: {{ book.author }}</li>
+        <li>Year: {{ book.year }}</li>
+    </ul>
+
+    <h2>Reviews and grading</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.review }}. *****Grade: {{ review.grade }}</li>
+        {% else %}
+            <li>No reviews.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Write a review about this book:</h2>
+    <form action="{{ url_for('reviews', book_id=book.id) }}" method="POST">
+        <input type="text" style="margin: 10px 20px; padding: 10px 10px; width: 100px;" name="book_id" placeholder="Book_id">
+        <br>
+        <input type="text" style="margin: 10px 20px; padding: 10px 10px; width: 80%;" name="bookReview" placeholder="Write a review about this book">
+        <br>
+        <input type="number" style="margin: 10px 20px; padding: 10px 10px; width: 100px;" name="bookRange" min="1" max="5" step="1" placeholder="Range 1 to 5">
+        <br>
+        <button type="submit" style="margin: 10px 20px; padding: 10px 10px; background-color: lightblue; border-radius: 10px;" class="submit-btn">SUBMIT</button>
+    </form>
+
+{% endblock %}

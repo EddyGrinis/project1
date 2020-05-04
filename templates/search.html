@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 
-        <h2>{% block heading %} Search a book by ISBN, Title or Author of a book {% endblock %}</h2>
+{% block heading %}
+    <h1>Search a book by ISBN, Title or Author of a book</h1>
+    <h2>Hi, {{ session["user_name"] }}</h2>
+    <style>
+        .submit-btn {width: 150px; padding: 10px 30px; cursor: pointer; display: block; margin: 10px 20px;
+        background: #66ccff; border: 0; outline: none; border-radius: 30px;}
+        .input-field {width: 350px; padding: 10px 0; margin: 20px 20px; border-left: 0; border-top: 0;
+        border-right: 0; border-bottom: 1px solid #999; outline: none; background: white; display: block; font-size: 16px;}
+    </style>
+{% endblock %}
 
-        {% block body %}
-        <form action="{{ url_for('hello') }}" method="POST">
-            <input type="text" name="book" placeholder="What are you searching for?">
-            <br>
-            <br>
-            <button>Submit</button>
-        </form>
-        {% endblock %}
+{% block body %}
+    <form action="{{ url_for('books') }}" method="POST">
+        <input type="text" class="input-field" name="quest" placeholder="Enter ISBN, author or title of a book" required>
+        <button type="submit" class="submit-btn">SUBMIT</button>
+    </form>
+
+{% endblock %}
   </body>
 </html>
